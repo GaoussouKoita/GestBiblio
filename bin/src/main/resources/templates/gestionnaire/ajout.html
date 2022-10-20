@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+    <title>Ajout-Modification de Gestionnaire</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.css}"/>
+</head>
+<body>
+</br>
+<div th:include="header.html"></div>
+
+<div class="col-md-10 col-md-offset-1">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h2 class="panel-title text-center">Ajout-Modification de Gestionnaire</h2>
+        </div>
+        <div class="panel-body">
+            <form th:object="${gestionnaire}" th:action="@{/gest/add}" method="POST"
+                  class="form-horizontal">
+
+                <input type="hidden" th:field="*{id}" class="form-control"/>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Nom</label>
+                    <div class="col-md-10">
+                        <input type="text" th:field="*{nom}" class="form-control"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Prenom</label>
+                    <div class="col-md-10">
+                        <input type="text" th:field="*{prenom}" class="form-control"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Adresse</label>
+                    <div class="col-md-10">
+                        <input type="text" th:field="*{adresse}" class="form-control"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Telephone</label>
+                    <div class="col-md-10">
+                        <input type="text" th:field="*{tel}" class="form-control"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Email</label>
+                    <div class="col-md-10">
+                        <input type="text" th:field="*{email}" class="form-control"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Login</label>
+                    <div class="col-md-10">
+                        <input type="text" th:field="*{login}" class="form-control"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Password</label>
+                    <div class="col-md-10">
+                        <input type="text" th:field="*{password}" class="form-control"/>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <input type="submit" value="Sauvegarder" class="btn btn-primary">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

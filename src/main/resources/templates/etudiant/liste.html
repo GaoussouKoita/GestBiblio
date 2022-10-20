@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+    <title>Liste des Etudiants</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.css}"/>
+</head>
+<body>
+<div th:include="header.html"></div>
+
+<div class="row">
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+
+            <ul class="nav navbar-nav">
+                <li class="active"><a th:href="@{/etud/add}">Ajouter</a></li>
+            </ul>
+            <ul>
+                <form th:action="@{/etud/search}" method="GET" class="navbar-form navbar-right">
+                    <div class="form-group">
+                        <input type="text" th:name="email" class="form-control" placeholder="Email de l'etudiant">
+                    </div>
+                    <button type="submit" class="btn btn-default">Rechercher</button>
+                </form>
+            </ul>
+        </div>
+    </nav>
+
+</div>
+<div class="row ">
+    <div class="col-md-10 col-md-offset-1">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Matricule</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Adresse</th>
+                <th>Telephone</th>
+                <th>Email</th>
+                <th>Login</th>
+                <th>Password</th>
+                <th>Classe</th>
+                <th class="text-center">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr th:each="etud : ${ etudiants }">
+                <td th:text="${ etud.id }"></td>
+                <td th:text="${ etud.nom }"></td>
+                <td th:text="${ etud.prenom }"></td>
+                <td th:text="${ etud.adresse }"></td>
+                <td th:text="${ etud.tel }"></td>
+                <td th:text="${ etud.email }"></td>
+                <td th:text="${ etud.login }"></td>
+                <td th:text="${ etud.password }"></td>
+                <td th:text="${ etud.classe }"></td>
+                <td>
+                    <button class="btn btn-danger">
+                        <a onclick="return confirm('Etes-vous sur?')"
+                           th:href="@{/etud/delete(id=${etud.id})}">Supprimer</a>
+                    </button>
+                    <button class="btn btn-info">
+                        <a th:href="@{/etud/update(id=${etud.id})}">Modifier</a>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <ul class="nav nav-pills" th:if="${nbreTotal} > 7 ">
+            <li th:each=" page, status:${pages}">
+                <a th:href="@{/etud/liste(p=${status.index})}" th:text="${status.index+1}"></a>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.css}"/>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav">
+            <li th:with="urls=${new String[]{'/gest/liste','/gest/add'}}"
+                th:class="${#arrays.contains(urls, #httpServletRequest.getRequestURI()) ? 'active' : ''}"><a
+                    th:href="@{/gest/liste}">Gestionnaire</a></li>
+
+            <li th:with="urls=${new String[]{'/etud/liste','/etud/add'}}"
+                th:class="${#arrays.contains(urls, #httpServletRequest.getRequestURI()) ? 'active' : ''}"><a
+                    th:href="@{/etud/liste}">Etudiant</a></li>
+
+            <li th:with="urls=${new String[]{'/doc/liste','/doc/add'}}"
+                th:class="${#arrays.contains(urls, #httpServletRequest.getRequestURI()) ? 'active' : ''}"><a
+                    th:href="@{/doc/liste}">Document</a></li>
+
+            <li th:with="urls=${new String[]{'/biblio/liste','/biblio/add'}}"
+                th:class="${#arrays.contains(urls, #httpServletRequest.getRequestURI()) ? 'active' : ''}"><a
+                    th:href="@{/biblio/liste}">Bibliotheque</a></li>
+
+            <li th:with="urls=${new String[]{'/emprunt/liste','/emprunt/add'}}"
+                th:class="${#arrays.contains(urls, #httpServletRequest.getRequestURI()) ? 'active' : ''}"><a
+                    th:href="@{/emprunt/liste}">Emprunt</a></li>
+
+
+
+        </ul>
+    </div>
+</nav>
+</body>
+</html>

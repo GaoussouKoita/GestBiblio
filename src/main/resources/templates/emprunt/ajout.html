@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+    <title>Ajout-Modification d'Emprunt</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.css}"/>
+</head>
+<body>
+<div th:include="header.html"></div>
+
+</br>
+<div class="col-md-10 col-md-offset-1">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h2 class="panel-title text-center">Ajout-Modification d'emprunt</h2>
+        </div>
+        <div class="panel-body">
+            <form th:object="${emprunt}" th:action="@{/emprunt/add}" method="POST"
+                  class="form-horizontal">
+
+                <input type="hidden" th:field="*{id}" class="form-control"/>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Date d'Emprunt</label>
+                    <div class="col-md-10">
+                        <input type="date" th:field="*{dateEmprunt}" class="form-control"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Date de Retour</label>
+                    <div class="col-md-10">
+                        <input type="date" th:field="*{dateRetour}" class="form-control"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Code Document</label>
+                    <div class="col-md-10">
+                        <input type="text" th:field="*{document.codeDoc}" class="form-control"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">ID etudiant</label>
+                    <div class="col-md-10">
+                        <input type="text" th:field="*{etudiant.id}" class="form-control"/>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <input type="submit" value="Sauvegarder" class="btn btn-primary">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

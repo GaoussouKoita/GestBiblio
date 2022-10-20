@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+    <title>Liste de Documents</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.css}"/>
+</head>
+<body>
+<div th:include="header.html"></div>
+
+<div class="row">
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+
+            <ul class="nav navbar-nav">
+                <li class="active"><a th:href="@{/doc/add}">Ajouter</a></li>
+            </ul>
+            <ul>
+                <form th:action="@{/doc/search}" method="GET" class="navbar-form navbar-right">
+                    <div class="form-group">
+                        <input type="text" th:name="titre" class="form-control" placeholder="Entre le titre du document">
+                    </div>
+                    <button type="submit" class="btn btn-default">Rechercher</button>
+                </form>
+            </ul>
+        </div>
+    </nav>
+</div>
+<div class="row ">
+    <div class="col-md-10 col-md-offset-1">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Code</th>
+                <th>Auteur</th>
+                <th>Domaine</th>
+                <th>Titre</th>
+                <th>Type</th>
+                <th>Bibliotheque</th>
+                <th class="text-center">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr th:each="doc : ${ documents }"  th:object="${doc}" th:if="${doc.dispo} ==true">
+                <td th:text="${ doc.codeDoc }"></td>
+                <td th:text="${ doc.auteur }"></td>
+                <td th:text="${ doc.domaine }"></td>
+                <td th:text="${ doc.titre }"></td>
+                <td th:text="${ doc.type }"></td>
+                <td th:text="${ doc.biblio.codeBiblio }"></td>
+                <td>
+                    <button class="btn btn-danger">
+                        <a onclick="return confirm('Etes-vous sur?')" th:href="@{/doc/delete(id=${doc.codeDoc})}">supprimer</a>
+                    </button>
+                    <button class="btn btn-info">
+                        <a th:href="@{/doc/update(id=${doc.codeDoc})}">Modifier</a>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <ul class="nav nav-pills"  th:if="${nbreTotal} > 7 ">
+            <li th:each=" page, status:${pages}">
+                <a th:href="@{/doc/liste(p=${status.index})}" th:text="${status.index+1}"></a>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+    <title>Liste des Gestionnaires</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.css}"/>
+</head>
+<body>
+<div th:include="header.html"></div>
+
+<div class="row">
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+
+            <ul class="nav navbar-nav">
+                <li class="active"><a th:href="@{/gest/add}">Ajouter</a></li>
+            </ul>
+            <ul>
+                <form th:action="@{/gest/search}" method="GET" class="navbar-form navbar-right">
+                    <div class="form-group">
+                        <input type="text" th:name="email" class="form-control" placeholder="Email du gestionnaire">
+                    </div>
+                    <button type="submit" class="btn btn-default">Rechercher</button>
+                </form>
+            </ul>
+        </div>
+    </nav>
+</div>
+<div class="row ">
+    <div class="col-md-10 col-md-offset-1">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Adresse</th>
+                <th>Telephone</th>
+                <th>Email</th>
+                <th>Login</th>
+                <th>Password</th>
+                <th class="text-center">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr th:each="gest : ${ gestionnaires }">
+                <td th:text="${ gest.nom }"></td>
+                <td th:text="${ gest.prenom }"></td>
+                <td th:text="${ gest.adresse }"></td>
+                <td th:text="${ gest.tel }"></td>
+                <td th:text="${ gest.email }"></td>
+                <td th:text="${ gest.login }"></td>
+                <td th:text="${ gest.password }"></td>
+                <td>
+                    <button class="btn btn-danger">
+                        <a onclick="return confirm('Etes-vous sur?')"
+                           th:href="@{/gest/delete(id=${gest.id})}">supprimer</a>
+                    </button>
+
+                    <button class="btn btn-info">
+                        <a th:href="@{/gest/update(id=${gest.id})}" class="text-white">Modifier</a>
+                    </button>
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <ul class="nav nav-pills" th:if="${nbreTotal} > 7 ">
+            <li th:each=" page, status:${pages}">
+                <a th:href="@{/gest/liste(p=${status.index})}" th:text="${status.index+1}"></a>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+    <title>Liste des Bibliotheque</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.css}"/>
+</head>
+<body>
+<div th:include="header.html"></div>
+
+<div class="row">
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+
+            <ul class="nav navbar-nav">
+                <li class="active"><a th:href="@{/biblio/add}">Ajouter</a></li>
+            </ul>
+            <ul>
+                <form th:action="@{/biblio/search}" method="GET" class="navbar-form navbar-right">
+                    <div class="form-group">
+                        <input type="text" th:name="nom" class="form-control" placeholder="Nom de la bibliotheque">
+                    </div>
+                    <button type="submit" class="btn btn-default">Rechercher</button>
+                </form>
+            </ul>
+        </div>
+    </nav>
+</div>
+<div class="row ">
+    <div class="col-md-10 col-md-offset-1">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Code</th>
+                <th>Nom</th>
+                <th>Adresse</th>
+                <th>Telephone</th>
+                <th>Email</th>
+                <th class="text-center">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr th:each="biblio : ${ bibliotheques }">
+                <td th:text="${ biblio.codeBiblio }"></td>
+                <td th:text="${ biblio.nom }"></td>
+                <td th:text="${ biblio.adresse }"></td>
+                <td th:text="${ biblio.tel }"></td>
+                <td th:text="${ biblio.email }"></td>
+                <td>
+                    <button class="btn btn-danger">
+                        <a onclick="return confirm('Etes-vous sur?')" th:href="@{/biblio/delete(id=${biblio.codeBiblio})}">supprimer</a>
+                    </button>
+                    <button class="btn btn-info">
+                        <a th:href="@{/biblio/update(id=${biblio.codeBiblio})}">Modifier</a>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <ul class="nav nav-pills "  th:if="${nbreTotal} > 7 ">
+            <li th:each=" page, status:${pages}">
+                <a th:href="@{/biblio/liste(p=${status.index})}" th:text="${status.index+1}"></a>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

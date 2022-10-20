@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+    <title>Ajout-Modification de Bibliotheque</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.css}"/>
+
+</head>
+<body>
+<div th:include="header.html"></div>
+</br>
+<div class="col-md-10 col-md-offset-1">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h2 class="panel-title text-center">Ajout-Modification de Bibliotheque</h2>
+        </div>
+        <div class="panel-body">
+            <form th:object="${bibliotheque}" th:action="@{/biblio/add}" method="POST"
+                  class="form-horizontal">
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Code</label>
+                    <div class="col-md-10">
+
+                        <input type="text" th:field="*{codeBiblio}" class="form-control"/>
+                        <span th:errors="*{codeBiblio}"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Nom</label>
+                    <div class="col-md-10">
+                        <input type="text" th:field="*{nom}" class="form-control"/>
+                        <span th:errors="*{nom}"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Adresse</label>
+                    <div class="col-md-10">
+                        <input type="text" th:field="*{adresse}" class="form-control"/>
+                        <span th:errors="*{adresse}"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Telephone</label>
+                    <div class="col-md-10">
+                        <input type="text" th:field="*{tel}" class="form-control"/>
+                        <span th:errors="*{tel}"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Email</label>
+                    <div class="col-md-10">
+                        <input type="text" th:field="*{email}" class="form-control"/>
+                        <span th:errors="*{email}"></span>
+                    </div>
+                </div>
+
+
+                <div class="text-center">
+                    <input type="submit" value="Sauvegarder" class="btn btn-primary">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
